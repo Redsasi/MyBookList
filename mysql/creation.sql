@@ -59,20 +59,6 @@ CREATE TABLE IF NOT EXISTS MBL_CatLivre
    FOREIGN KEY FK_CatLivre_Categorie (CatLivre_Categorie) REFERENCES MBL_Categorie (Cat_Id)
 
  ) ENGINE=InnoDB;
- 
-# -----------------------------------------------------------------------------
-#       TABLE : MBL_Administrateur
-# -----------------------------------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS MBL_Administrateur
- (
-   Admin_Id INTEGER NOT NULL AUTO_INCREMENT,
-   Admin_Pseudo INTEGER NOT NULL,
-   Admin_MDP VARCHAR(255) NOT NULL,
-   Admin_email VARCHAR(255) NOT NULL,
-   PRIMARY KEY (Admin_Id) 
- ) ENGINE=InnoDB;
-
 # -----------------------------------------------------------------------------
 #       TABLE : MBL_Lecteur
 # -----------------------------------------------------------------------------
@@ -80,9 +66,10 @@ CREATE TABLE IF NOT EXISTS MBL_Administrateur
 CREATE TABLE IF NOT EXISTS MBL_Lecteur
  (
    Lect_Id INTEGER NOT NULL AUTO_INCREMENT,
-   Lect_Pseudo INTEGER NOT NULL,
+   Lect_Pseudo VARCHAR(255) NOT NULL,
    Lect_MDP VARCHAR(255) NOT NULL,
-   Lect_email VARCHAR(255) NOT NULL,
+   Lect_email VARCHAR(255) NOT NULL UNIQUE,
+   Lect_admin BOOLEAN NOT NULL,
    PRIMARY KEY (Lect_Id) 
  ) ENGINE=InnoDB;
 
@@ -98,4 +85,4 @@ CREATE TABLE IF NOT EXISTS MBL_LecteurLivre
    PRIMARY KEY (LectLivre_Livre, LectLivre_Lecteur),
    FOREIGN KEY FK_LectLivre_Livre (LectLivre_Livre) REFERENCES MBL_Livre (Lvr_Id),
    FOREIGN KEY FK_LectLivre_Lecteur (LectLivre_Lecteur) REFERENCES MBL_Lecteur (Lect_Id)
- ) ENGINE=Inno
+ ) ENGINE=InnoDB;
