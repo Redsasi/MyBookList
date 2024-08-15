@@ -10,12 +10,10 @@
 
     <body>
         <?php
-            include_once("includes/header.php")
-        ?>
-        <?php
-        if(isset($_GET["EmailUsed"])){
-           echo "<h2 id='errorEmail'>Email already used</h2>";
-        }
+            include_once("includes/header.php");
+            if(isset($_GET["EmailUsed"])){
+            echo "<h2 id='MessageError'>Email already used</h2>";
+            }
         ?>
         <section>
             <h1>Carte MyBookList</h1>

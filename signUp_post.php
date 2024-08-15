@@ -6,7 +6,7 @@
         
         $pseudo = htmlspecialchars($_POST['pseudo']);
         $email = htmlspecialchars($_POST['email']);
-        $password = password_hash(htmlspecialchars($_POST['password']),PASSWORD_DEFAULT);
+        $password = htmlspecialchars($_POST['password']);
 
 
         include_once("crud/function.php");

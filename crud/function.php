@@ -18,6 +18,7 @@ function userExist($conn, $email){
 }
 
 function creatUser($conn, $pseudo, $password, $email){
+    $password = password_hash($password,PASSWORD_DEFAULT);
     $req = $conn->prepare('INSERT INTO mbl_lecteur (`Lect_Pseudo`, `Lect_MDP`, `Lect_email`, `Lect_admin`) values (:pseudo, :passwd, :email, FALSE)');
     $req->execute([
         'pseudo' => $pseudo,
@@ -32,5 +33,18 @@ function getUserOfEmail($conn, $email){
     ]);
     $users = $req->fetchAll();
     return $users[0];
+}
+function getUserByLogin($conn, $email, $password){
+    $req = $conn->prepare('SELECT * FROM mbl_lecteur WHERE Lect_email = :email');
+    $req->execute([
+        'email' => $email
+    ]);
+    $users = $req->fetchAll();
+    $user = $users[0];
+    if(password_verify($password,$user['Lect_MDP'])){
+        return $user;
+    }else{
+        return null;
+    }
 }
 ?>
