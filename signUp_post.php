@@ -15,12 +15,14 @@
             header("Location: signUp.php?EmailUsed=");
         }
         
-        
-        
-        /*Insertion de la personne*/
+        //Insertion de l'utilisateur
+        creatUser($conn,$pseudo,$password,$email);
 
-
-        //Connexion directe au profil crée
+        session_start();
+        // connexion de l'utilisateur
+        $user = getUserOfEmail($conn, $email);
+        $_SESSION['ConnexionID'] = $user['Lect_Id'];
+        $_SESSION['isAdmin'] = $user['Lect_admin'];
     }
     header("Location: index.php");
 ?>
