@@ -8,12 +8,23 @@
         <nav>
             <ul>
                 <li><a id="icone" href="index.php"><img src="images/Icone.png"/></a></li>
-                <li><a href="#">My Books</a></li> <!--uniquement quand connecter en temps que lecteur -->
-                <li><a href="#">Search books</a></li> <!--tous le temps disponible même sans connection -->
-                <li><a href="#">Add Books</a></li><!--uniquement quand connecter en temps qu'administrateur -->
-                <li><a href="#">Login</a></li><!--uniquement quand non connecter-->
-                <li><a href="signUp.php">Sign Up</a></li><!--uniquement quand non connecter-->
-                <li><a href="#">Logout</a></li><!--uniquement quand déjà connecter-->
+                <?php
+                    session_start();
+                    if(isset($_SESSION['ConnexionID'])){// uniquement quand connecter
+                        echo '<li><a href="#">My Books</a></li>';
+                    }
+                    echo '<li><a href="#">Search books</a></li>';// tous le temps disponible même sans connection
+                    if(isset($_SESSION['isAdmin'])){// uniquement quand connecter et a les droit admin
+                        echo '<li><a href="#">Add Books</a></li>';
+                    }
+                    if(!isset($_SESSION['ConnexionID'])){// uniquement quand non connecter
+                        echo '<li><a href="#">Login</a></li>'; 
+                        echo '<li><a href="signUp.php">Sign Up</a></li>';
+                    }
+                    if(isset($_SESSION['ConnexionID'])){// uniquement quand déjà connecter
+                        echo '<li><a href="logout.php">Logout</a></li>';
+                    }
+                ?>
             </ul>
         </nav>
     </header>
