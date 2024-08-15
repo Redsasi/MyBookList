@@ -1,25 +1,39 @@
+html{
+	background-color: #E7AE77;
+}
+/*Header Style*/
 
 header nav ul {
 	margin: 0px;
 	padding: 0px;
 	list-style: none;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 }
 
 header nav ul li {
-	width: 140px;
-	border: 1px solid #a3c0d5;
+    flex: 1;
+	border-radius: 2vh;
+	border: 1px solid #4A4D52;
+	background-color: #834734;
+	padding: auto;
 }
 
 header nav ul a{
-	padding-left: 20px;
-	display: block;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 2vh;
+	height: 100%;
+
+	font-family: Arial;
 	text-decoration: none;
-	color: #5d90b5;
+	color: white;
 }
 
 header nav ul a:hover{
-	color: #294f79;
-	background-color: #e9eefb;
+	background-color: hsla(0, 0%, 0%, 0.3);
+}
+#icone img{
+	width: 30%;
 }
