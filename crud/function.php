@@ -26,6 +26,7 @@ function creatUser($conn, $pseudo, $password, $email){
         'email' => $email
     ]);
 }
+
 function getUserOfEmail($conn, $email){
     $req = $conn->prepare('SELECT * FROM mbl_lecteur WHERE Lect_email = :email');
     $req->execute([
@@ -34,6 +35,7 @@ function getUserOfEmail($conn, $email){
     $users = $req->fetchAll();
     return $users[0];
 }
+
 function getUserByLogin($conn, $email, $password){
     $req = $conn->prepare('SELECT * FROM mbl_lecteur WHERE Lect_email = :email');
     $req->execute([
@@ -46,5 +48,28 @@ function getUserByLogin($conn, $email, $password){
     }else{
         return null;
     }
+}
+
+function addBookType($conn, $typeName, $typeDescription){
+    $req = $conn->prepare('insert into mbl_type (`Type_Nom`, `Type_Description`) values(:Type_Nom, :Type_Description)');
+    $req->execute([
+        'Type_Nom' => $typeName,
+        'Type_Description' => $typeDescription
+    ]);
+}
+
+function getBookTypes($conn){
+    $req = $conn->prepare('SELECT * FROM mbl_type');
+    $req->execute();
+    $types = $req->fetchAll();
+    return $types;
+}
+
+function addBook($conn, $name, $idType, $imageData, $description){
+    $req = $conn->prepare('insert into mbl_type (`Type_Nom`, `Type_Description`) values(:Type_Nom, :Type_Description)');
+    $req->execute([
+        'Type_Nom' => $typeName,
+        'Type_Description' => $typeDescription
+    ]);
 }
 ?>

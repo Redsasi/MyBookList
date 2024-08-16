@@ -10,8 +10,7 @@
 section{
     display: flex;
     flex-direction: column;
-    width: 60vh;
-    height: 30vh;
+    width: 30%;
     border-radius: 5vh;
     margin:auto;
     margin-top: 15%;

@@ -17,5 +17,5 @@
         $_SESSION['ConnexionID'] = $user['Lect_Id'];
         $_SESSION['isAdmin'] = $user['Lect_admin'];
     }
-    header("Location: index.php");
+    header("Location: /index.php");
 ?>

@@ -17,7 +17,7 @@
         ?>
         <section>
             <h1>Carte MyBookList</h1>
-            <form action="login_post.php" method="post">
+            <form action="post_login.php" method="post">
                 <img id="baseProfilePic" src="images/BaseProfilePicture.jpg"/>
                 <div class="profileInput">
                     <div class="tbxInput">

@@ -1,0 +1,29 @@
+section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.tbxInput{
+    padding: 0 1vh 1vh 1vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; 
+}
+form{
+    border-radius: 5vh;
+    padding: 5vh;
+	border: 3px solid #BE681B;
+    background-color: #612E12;
+    color: beige;
+}
+h1{
+    margin: 0 0 2vh 0;
+    text-decoration: underline;
+}
+textarea{
+    height: 35vh;
+    width: 30vh;
+}

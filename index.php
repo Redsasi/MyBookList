@@ -7,9 +7,11 @@
     <link href="css/global.css" rel="stylesheet" />
 </head>
 
-<?php
-include_once("includes/header.php")
-?>
 <body>
-    
+    <?php
+    include_once("includes/header.php")
+    ?>
+     <section>
+        
+     </section>
 </body>

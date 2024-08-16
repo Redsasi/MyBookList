@@ -1,3 +1,7 @@
 html{
 	background-color: #E7AE77;
+	height: 100%;
+}
+body{
+	height: 80%;
 }
