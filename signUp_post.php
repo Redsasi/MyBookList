@@ -22,7 +22,9 @@
         // connexion de l'utilisateur
         $user = getUserOfEmail($conn, $email);
         $_SESSION['ConnexionID'] = $user['Lect_Id'];
-        $_SESSION['isAdmin'] = $user['Lect_admin'];
+        if($user['Lect_admin'] == 1){
+            $_SESSION['isAdmin'];
+        }
     }
     header("Location: index.php");
 ?>
