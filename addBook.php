@@ -43,7 +43,7 @@
             <!-- Image -->
                 <div class="tbxInput">
                     <label id="image">Image : </label>
-                    <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png"/>
+                    <input type="file" name="image" id="image" accept=".jpg"/>
                 </div>
             <!-- Description -->
                 <div>

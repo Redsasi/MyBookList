@@ -1,9 +1,9 @@
 <?php
 function getConn(){
     $conn = new PDO(
-        'mysql:host=localhost;dbname=mybooklist;charset=utf8',
-        'root',
-        ''
+        'mysql:host=hhva.myd.infomaniak.com;dbname=hhva_saiam;charset=utf8',
+        'hhva_saiam',
+        '3JEjBw9_zZ2'
     );
     return $conn;
 }
