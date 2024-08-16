@@ -17,7 +17,7 @@
         <input type="text" id="search" name="search" placeholder="Search...">
         <input type="submit" id="searchButton" value="search">
      </form>
-        <div id="Biblioteque">
+        <div id="Biblioteque" style="height:90%;">
             <div id="BackGroundBiblioteque">
                 <?php
                     include_once("crud/function.php");

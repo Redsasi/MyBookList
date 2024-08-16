@@ -11,7 +11,7 @@
                 <?php
                     session_start();
                     if(isset($_SESSION['ConnexionID'])){// uniquement quand connecter
-                        echo '<li><a href="#">My Books</a></li>';
+                        echo '<li><a href="myBook.php">My Books</a></li>';
                     }
                     if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1){// uniquement quand connecter et a les droit admin
                         echo '<li><a href="addBook.php">Add Books</a></li>';

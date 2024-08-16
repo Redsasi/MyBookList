@@ -106,6 +106,7 @@ function getBooks($conn){
     $books = $req->fetchAll();
     return $books;
 }
+
 function getBooksSearch($conn,$searchValue){
     $req = $conn->prepare("SELECT * FROM mbl_livre WHERE `Lvr_Nom` LIKE :search");
     $req->execute([
@@ -139,6 +140,59 @@ function getNoCatBook($conn, $bookId){
     ]);
     $categories = $req->fetchAll();
     return $categories;
-
 }
+
+function getBooksByReader($conn, $idReader, $link){
+    $req = $conn->prepare('SELECT * FROM mbl_lecteurlivre JOIN mbl_livre ON `LectLivre_Livre` = `Lvr_Id` WHERE `LectLivre_Lecteur` = :readerId AND `LectLivre_Type` = :typeLink');
+    $req->execute([
+        'readerId' => $idReader,
+        'typeLink' => $link
+    ]);
+    $books = $req->fetchAll();
+    return $books;
+}
+
+function getBooksSearchByReader($conn, $searchValue, $idReader, $link){
+    $req = $conn->prepare('SELECT * FROM mbl_lecteurlivre JOIN mbl_livre ON `LectLivre_Livre` = `Lvr_Id` WHERE `LectLivre_Lecteur` = :readerId AND `LectLivre_Type` = :typeLink AND `Lvr_Nom` LIKE :search');
+    $req->execute([
+        'readerId' => $idReader,
+        'typeLink' => $link,
+        'search' => "%".$searchValue."%"
+    ]);
+    $books = $req->fetchAll();
+    return $books;
+}
+
+function getReaderBookStatus($conn, $idReader, $idBook){
+    $req = $conn->prepare('SELECT * FROM mbl_lecteurlivre WHERE `LectLivre_Livre` = :bookId AND `LectLivre_Lecteur` = :readerId');
+    $req->execute([
+        'bookId' => $idBook,
+        'readerId' => $idReader
+    ]);
+    $status = $req->fetchAll();
+    if(!empty($status)){
+        return $status;
+    }else{
+        return null;
+    }
+}
+
+function addReaderBookStatus($conn, $idReader, $idBook, $status){
+    $req = $conn->prepare('insert into mbl_lecteurlivre (`LectLivre_Livre`, `LectLivre_Lecteur`, `LectLivre_Type`) values(:bookId, :readerId, :status)');
+    $req->execute([
+        'bookId' => $idBook,
+        'readerId' => $idReader,
+        'status' => $status
+    ]);
+}
+
+function updateReaderBookStatus($conn, $idReader, $idBook, $status){
+    $req = $conn->prepare('update mbl_lecteurlivre set LectLivre_Type = :status where LectLivre_Livre = :bookId and LectLivre_Lecteur = :readerId');
+    $req->execute([
+        'bookId' => $idBook,
+        'readerId' => $idReader,
+        'status' => $status
+    ]);
+}
+
 ?>

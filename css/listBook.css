@@ -11,19 +11,28 @@ section{
 form{
     margin: 2vh;
 }
+#Library{
+    display:flex;
+    flex-direction: row;
+}
 #Biblioteque{
     width: 100%;
-    height: 90%;
+    height: 65%;
     overflow: scroll;
     overflow-x: hidden;
+    border-radius: 2vh;
+    border:0.5vh #8F6130 solid;
 }
-
+h1{
+    color: beige;
+    text-align: center;
+    padding: 0;
+}
 #BackGroundBiblioteque{
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
-    background-image: url("/images/Biblioteque.png");
-    padding: 1vh;
-    background-size:100%;
+    margin: 1vh;
 
 }
 

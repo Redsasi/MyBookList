@@ -63,6 +63,25 @@
                         </select>
                         <input type="submit" value="Categorie" />
                     </form>
+                    </br>
+                    <?php
+                }
+
+                if(isset($_SESSION['ConnexionID'])){
+                    //get the status with the book
+                    $userId = $_SESSION['ConnexionID'];
+                    $statut = getReaderBookStatus($conn, $userId, $bookId);
+                    ?>
+                    <form action="post_changeBookReader.php?bookId=<?=$book["Lvr_Id"]?>" method="post">
+                        <label id="statut">Changer le statut : </label>
+                        <select name="statut" id="statut" required>
+                            <option value="" disabled <?php if($statut == null){echo "selected";} ?>>statu null</option>
+                            <option value="a lire" <?php if($statut != null && $statut[0]["LectLivre_Type"] == "a lire"){echo "selected";} ?>>a lire</option>
+                            <option value="en coure" <?php if($statut != null && $statut[0]["LectLivre_Type"] == "en coure"){echo "selected";} ?>>en coure</option>
+                            <option value="fini" <?php if($statut != null && $statut[0]["LectLivre_Type"] == "fini"){echo "selected";} ?>>fini</option>
+                        </select>
+                        <input type="submit" value="statut" />
+                    </form>
                     <?php
                 }
             ?>
