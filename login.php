@@ -28,7 +28,7 @@
                         <label id="password">Mot de passe : </label>
                         <input type="password" name="password" id="password" required/>
                     </div>
-                <input class="btnSignUp" type="submit" value="Sign Up" />
+                <input class="btnLogin" type="submit" value="Login" />
                 </div>
             </form>
         </section>
