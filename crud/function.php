@@ -58,6 +58,14 @@ function addBookType($conn, $typeName, $typeDescription){
     ]);
 }
 
+function addBookCat($conn, $catName, $catDescription){
+    $req = $conn->prepare('insert into mbl_categorie (`Cat_Nom`, `Cat_Description`) values(:Cat_Nom, :Cat_Description)');
+    $req->execute([
+        'Cat_Nom' => $catName,
+        'Cat_Description' => $catDescription
+    ]);
+}
+
 function getBookTypes($conn){
     $req = $conn->prepare('SELECT * FROM mbl_type');
     $req->execute();
@@ -82,5 +90,29 @@ function addBookNoImage($conn, $name, $idType, $description){
         'Lvr_Description' => $description,
         'Lvr_Type' => $idType
     ]);
+}
+
+function getBooks($conn){
+    $req = $conn->prepare('SELECT * FROM mbl_livre');
+    $req->execute();
+    $books = $req->fetchAll();
+    return $books;
+}
+function getBooksSearch($conn,$searchValue){
+    $req = $conn->prepare("SELECT * FROM mbl_livre WHERE `Lvr_Nom` LIKE :search");
+    $req->execute([
+        'search' => "%".$searchValue."%"
+    ]);
+    $books = $req->fetchAll();
+    return $books;
+}
+
+function getBookById($conn, $id){
+    $req = $conn->prepare("SELECT * FROM mbl_livre WHERE `Lvr_Id` = :id");
+    $req->execute([
+        'id' => $id
+    ]);
+    $books = $req->fetchAll();
+    return $books[0];
 }
 ?>
