@@ -1,5 +1,10 @@
 <?php
 
+    //si il n'y a pas de droit admin aucun livre ne se rajoute
+    if(!isset($_SESSION['isAdmin'])){
+        header("Location: index.php");
+    }
+    
     if(isset($_POST['name']) && !empty($_POST['name']) &&
     isset($_POST['description']) && !empty($_POST['description'])){
         
