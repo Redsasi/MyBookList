@@ -12,7 +12,7 @@
     <?php
     include_once("includes/header.php");
     //if not admin exclude return to index page
-    if(!isset($_SESSION['isAdmin'])){
+    if(!(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1)){
         header("Location: index.php");
     }
 

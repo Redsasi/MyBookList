@@ -66,6 +66,14 @@ function addBookCat($conn, $catName, $catDescription){
     ]);
 }
 
+function addCatToBook($conn, $bookId, $catId){
+    $req = $conn->prepare('insert into mbl_catlivre (`CatLivre_Livre`, `CatLivre_Categorie`) values(:bookId, :categorieId)');
+    $req->execute([
+        'bookId' => $bookId,
+        'categorieId' => $catId
+    ]);
+}
+
 function getBookTypes($conn){
     $req = $conn->prepare('SELECT * FROM mbl_type');
     $req->execute();
@@ -107,12 +115,30 @@ function getBooksSearch($conn,$searchValue){
     return $books;
 }
 
-function getBookById($conn, $id){
-    $req = $conn->prepare("SELECT * FROM mbl_livre WHERE `Lvr_Id` = :id");
+function getBookDetailsById($conn, $id){
+    $req = $conn->prepare("SELECT Lvr_Id, Lvr_Nom, Lvr_Description, Lvr_Image, Type_Nom FROM mbl_livre JOIN mbl_type ON `Lvr_Type` = `Type_Id` WHERE `Lvr_Id` = :id");
     $req->execute([
         'id' => $id
     ]);
     $books = $req->fetchAll();
     return $books[0];
+}
+function getCategorieNameOfBookId($conn, $id){
+    $req = $conn->prepare("SELECT Cat_Nom FROM mbl_catlivre JOIN mbl_categorie on `CatLivre_Categorie` = `Cat_Id` WHERE `CatLivre_Livre` = :id");
+    $req->execute([
+        'id' => $id
+    ]);
+    $categories = $req->fetchAll();
+    return $categories;
+}
+
+function getNoCatBook($conn, $bookId){
+    $req = $conn->prepare("SELECT Cat_Id, Cat_Nom FROM mbl_categorie LEFT JOIN mbl_catlivre ON Cat_Id = CatLivre_Categorie AND CatLivre_Livre = :livreId WHERE CatLivre_Categorie IS NULL");
+    $req->execute([
+        'livreId' => $bookId
+    ]);
+    $categories = $req->fetchAll();
+    return $categories;
+
 }
 ?>

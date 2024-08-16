@@ -1,7 +1,8 @@
 <?php
 
     //si il n'y a pas de droit admin aucun livre ne se rajoute
-    if(!isset($_SESSION['isAdmin'])){
+    session_start();
+    if(!(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1)){
         header("Location: index.php");
     }
 

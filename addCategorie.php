@@ -12,14 +12,14 @@
     <?php
     include_once("includes/header.php");
     //if not admin exclude return to index page
-    if(!isset($_SESSION['isAdmin'])){
+    if(!(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1)){
         header("Location: index.php");
     }
 
     ?>
     <section>
-        <form action="post_addBookCat.php" method="post">
-        <h1>Add Book Type</h1>
+        <form action="post_addCategorie.php" method="post">
+        <h1>Add Book Categorie</h1>
             <!-- Nom -->
                 <div class="tbxInput">
                     <label id="name">name : </label>

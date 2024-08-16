@@ -13,10 +13,10 @@
                     if(isset($_SESSION['ConnexionID'])){// uniquement quand connecter
                         echo '<li><a href="#">My Books</a></li>';
                     }
-                    if(isset($_SESSION['isAdmin'])){// uniquement quand connecter et a les droit admin
+                    if(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1){// uniquement quand connecter et a les droit admin
                         echo '<li><a href="addBook.php">Add Books</a></li>';
                         echo '<li><a href="addBookType.php">Add Books Type</a></li>';
-                        echo '<li><a href="addBookCat.php">Add Books Categorie</a></li>';
+                        echo '<li><a href="addCategorie.php">Add Books Categorie</a></li>';
                     }
                     if(!isset($_SESSION['ConnexionID'])){// uniquement quand non connecter
                         echo '<li><a href="login.php">Login</a></li>'; 

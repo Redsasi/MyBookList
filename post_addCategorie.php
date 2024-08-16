@@ -18,7 +18,7 @@ if(!(isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1)){
         $conn = getConn();
         
         //Insertion du type de livre
-        addBookType($conn, $name, $description);
+        addBookCat($conn, $name, $description);
     }
     header("Location: /index.php");
 ?>
