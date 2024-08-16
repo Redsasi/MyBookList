@@ -27,9 +27,9 @@ CREATE TABLE IF NOT EXISTS MBL_Livre
  (
    Lvr_Id INTEGER NOT NULL AUTO_INCREMENT,
    Lvr_Nom VARCHAR(50) NOT NULL,
-   Lvr_Description VARCHAR(1000) NOT NULL,
+   Lvr_Description VARCHAR(5000) NOT NULL,
    Lvr_Type INTEGER NOT NULL,
-   Lvr_Image BLOB,
+   Lvr_Image MEDIUMBLOB,
    PRIMARY KEY (Lvr_Id),
    FOREIGN KEY FK_Livre_Type (Lvr_Type) REFERENCES MBL_Type (Type_Id)   
  ) ENGINE=InnoDB;

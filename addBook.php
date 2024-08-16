@@ -18,7 +18,7 @@
 
     ?>
     <section>
-        <form action="post_addBook.php" method="post">
+        <form action="post_addBook.php" method="post" enctype="multipart/form-data">
             <h1>Add Book</h1>
             <!-- Nom -->
                 <div class="tbxInput">

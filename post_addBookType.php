@@ -10,7 +10,7 @@
         include_once("crud/function.php");
         $conn = getConn();
         
-        //Insertion de l'utilisateur
+        //Insertion du type de livre
         addBookType($conn, $name, $description);
     }
     header("Location: /index.php");

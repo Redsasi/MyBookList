@@ -65,11 +65,22 @@ function getBookTypes($conn){
     return $types;
 }
 
-function addBook($conn, $name, $idType, $imageData, $description){
-    $req = $conn->prepare('insert into mbl_type (`Type_Nom`, `Type_Description`) values(:Type_Nom, :Type_Description)');
+function addBook($conn, $name, $idType, $description, $imageData){
+    $req = $conn->prepare('insert into mbl_livre (`Lvr_Nom`, `Lvr_Description`, `Lvr_Type`, `Lvr_Image`) values(:Lvr_Nom, :Lvr_Description, :Lvr_Type, :Lvr_Image);');
     $req->execute([
-        'Type_Nom' => $typeName,
-        'Type_Description' => $typeDescription
+        'Lvr_Nom' => $name,
+        'Lvr_Description' => $description,
+        'Lvr_Type' => $idType,
+        'Lvr_Image' => $imageData
+    ]);
+}
+
+function addBookNoImage($conn, $name, $idType, $description){
+    $req = $conn->prepare('insert into mbl_livre (`Lvr_Nom`, `Lvr_Description`, `Lvr_Type`) values(:Lvr_Nom, :Lvr_Description, :Lvr_Type)');
+    $req->execute([
+        'Lvr_Nom' => $name,
+        'Lvr_Description' => $description,
+        'Lvr_Type' => $idType
     ]);
 }
 ?>
