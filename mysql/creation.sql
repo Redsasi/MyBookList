@@ -1,12 +1,12 @@
 
 # -----------------------------------------------------------------------------
-#       DATABASE : MyBookList
+#       DATABASE : hhva_saiam
 # -----------------------------------------------------------------------------
 
-DROP DATABASE IF EXISTS MyBookList; 
+#DROP DATABASE IF EXISTS hhva_saiam; 
 
-CREATE DATABASE IF NOT EXISTS MyBookList;
-USE MyBookList;
+#CREATE DATABASE IF NOT EXISTS hhva_saiam;
+USE hhva_saiam;
 # -----------------------------------------------------------------------------
 #       TABLE : MBL_Type
 # -----------------------------------------------------------------------------
