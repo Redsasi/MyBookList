@@ -9,7 +9,7 @@ function getConn(){
 }
 
 function userExist($conn, $email){
-    $req = $conn->prepare('SELECT COUNT(*) FROM mbl_lecteur WHERE `Lect_email` = :email');
+    $req = $conn->prepare('SELECT COUNT(*) FROM MBL_Lecteur WHERE `Lect_email` = :email');
     $req->execute([
         'email' => $email
     ]);
@@ -19,7 +19,7 @@ function userExist($conn, $email){
 
 function creatUser($conn, $pseudo, $password, $email){
     $password = password_hash($password,PASSWORD_DEFAULT);
-    $req = $conn->prepare('INSERT INTO mbl_lecteur (`Lect_Pseudo`, `Lect_MDP`, `Lect_email`, `Lect_admin`) values (:pseudo, :passwd, :email, FALSE)');
+    $req = $conn->prepare('INSERT INTO MBL_Lecteur (`Lect_Pseudo`, `Lect_MDP`, `Lect_email`, `Lect_admin`) values (:pseudo, :passwd, :email, FALSE)');
     $req->execute([
         'pseudo' => $pseudo,
         'passwd' => $password,
@@ -28,7 +28,7 @@ function creatUser($conn, $pseudo, $password, $email){
 }
 
 function getUserOfEmail($conn, $email){
-    $req = $conn->prepare('SELECT * FROM mbl_lecteur WHERE Lect_email = :email');
+    $req = $conn->prepare('SELECT * FROM MBL_Lecteur WHERE Lect_email = :email');
     $req->execute([
         'email' => $email
     ]);
@@ -37,7 +37,7 @@ function getUserOfEmail($conn, $email){
 }
 
 function getUserByLogin($conn, $email, $password){
-    $req = $conn->prepare('SELECT * FROM mbl_lecteur WHERE Lect_email = :email');
+    $req = $conn->prepare('SELECT * FROM MBL_Lecteur WHERE Lect_email = :email');
     $req->execute([
         'email' => $email
     ]);
@@ -51,7 +51,7 @@ function getUserByLogin($conn, $email, $password){
 }
 
 function addBookType($conn, $typeName, $typeDescription){
-    $req = $conn->prepare('insert into mbl_type (`Type_Nom`, `Type_Description`) values(:Type_Nom, :Type_Description)');
+    $req = $conn->prepare('insert into MBL_Type (`Type_Nom`, `Type_Description`) values(:Type_Nom, :Type_Description)');
     $req->execute([
         'Type_Nom' => $typeName,
         'Type_Description' => $typeDescription
@@ -59,7 +59,7 @@ function addBookType($conn, $typeName, $typeDescription){
 }
 
 function addBookCat($conn, $catName, $catDescription){
-    $req = $conn->prepare('insert into mbl_categorie (`Cat_Nom`, `Cat_Description`) values(:Cat_Nom, :Cat_Description)');
+    $req = $conn->prepare('insert into MBL_Categorie (`Cat_Nom`, `Cat_Description`) values(:Cat_Nom, :Cat_Description)');
     $req->execute([
         'Cat_Nom' => $catName,
         'Cat_Description' => $catDescription
@@ -67,7 +67,7 @@ function addBookCat($conn, $catName, $catDescription){
 }
 
 function addCatToBook($conn, $bookId, $catId){
-    $req = $conn->prepare('insert into mbl_catlivre (`CatLivre_Livre`, `CatLivre_Categorie`) values(:bookId, :categorieId)');
+    $req = $conn->prepare('insert into MBL_Catlivre (`CatLivre_Livre`, `CatLivre_Categorie`) values(:bookId, :categorieId)');
     $req->execute([
         'bookId' => $bookId,
         'categorieId' => $catId
@@ -75,14 +75,14 @@ function addCatToBook($conn, $bookId, $catId){
 }
 
 function getBookTypes($conn){
-    $req = $conn->prepare('SELECT * FROM mbl_type');
+    $req = $conn->prepare('SELECT * FROM MBL_Type');
     $req->execute();
     $types = $req->fetchAll();
     return $types;
 }
 
 function addBook($conn, $name, $idType, $description, $imageData){
-    $req = $conn->prepare('insert into mbl_livre (`Lvr_Nom`, `Lvr_Description`, `Lvr_Type`, `Lvr_Image`) values(:Lvr_Nom, :Lvr_Description, :Lvr_Type, :Lvr_Image);');
+    $req = $conn->prepare('insert into MBL_Livre (`Lvr_Nom`, `Lvr_Description`, `Lvr_Type`, `Lvr_Image`) values(:Lvr_Nom, :Lvr_Description, :Lvr_Type, :Lvr_Image);');
     $req->execute([
         'Lvr_Nom' => $name,
         'Lvr_Description' => $description,
@@ -92,7 +92,7 @@ function addBook($conn, $name, $idType, $description, $imageData){
 }
 
 function addBookNoImage($conn, $name, $idType, $description){
-    $req = $conn->prepare('insert into mbl_livre (`Lvr_Nom`, `Lvr_Description`, `Lvr_Type`) values(:Lvr_Nom, :Lvr_Description, :Lvr_Type)');
+    $req = $conn->prepare('insert into MBL_Livre (`Lvr_Nom`, `Lvr_Description`, `Lvr_Type`) values(:Lvr_Nom, :Lvr_Description, :Lvr_Type)');
     $req->execute([
         'Lvr_Nom' => $name,
         'Lvr_Description' => $description,
@@ -101,14 +101,14 @@ function addBookNoImage($conn, $name, $idType, $description){
 }
 
 function getBooks($conn){
-    $req = $conn->prepare('SELECT * FROM mbl_livre');
+    $req = $conn->prepare('SELECT * FROM MBL_Livre');
     $req->execute();
     $books = $req->fetchAll();
     return $books;
 }
 
 function getBooksSearch($conn,$searchValue){
-    $req = $conn->prepare("SELECT * FROM mbl_livre WHERE `Lvr_Nom` LIKE :search");
+    $req = $conn->prepare("SELECT * FROM MBL_Livre WHERE `Lvr_Nom` LIKE :search");
     $req->execute([
         'search' => "%".$searchValue."%"
     ]);
@@ -117,7 +117,7 @@ function getBooksSearch($conn,$searchValue){
 }
 
 function getBookDetailsById($conn, $id){
-    $req = $conn->prepare("SELECT Lvr_Id, Lvr_Nom, Lvr_Description, Lvr_Image, Type_Nom FROM mbl_livre JOIN mbl_type ON `Lvr_Type` = `Type_Id` WHERE `Lvr_Id` = :id");
+    $req = $conn->prepare("SELECT Lvr_Id, Lvr_Nom, Lvr_Description, Lvr_Image, Type_Nom FROM MBL_Livre JOIN MBL_Type ON `Lvr_Type` = `Type_Id` WHERE `Lvr_Id` = :id");
     $req->execute([
         'id' => $id
     ]);
@@ -125,7 +125,7 @@ function getBookDetailsById($conn, $id){
     return $books[0];
 }
 function getCategorieNameOfBookId($conn, $id){
-    $req = $conn->prepare("SELECT Cat_Nom FROM mbl_catlivre JOIN mbl_categorie on `CatLivre_Categorie` = `Cat_Id` WHERE `CatLivre_Livre` = :id");
+    $req = $conn->prepare("SELECT Cat_Nom FROM MBL_Catlivre JOIN MBL_Categorie on `CatLivre_Categorie` = `Cat_Id` WHERE `CatLivre_Livre` = :id");
     $req->execute([
         'id' => $id
     ]);
@@ -134,7 +134,7 @@ function getCategorieNameOfBookId($conn, $id){
 }
 
 function getNoCatBook($conn, $bookId){
-    $req = $conn->prepare("SELECT Cat_Id, Cat_Nom FROM mbl_categorie LEFT JOIN mbl_catlivre ON Cat_Id = CatLivre_Categorie AND CatLivre_Livre = :livreId WHERE CatLivre_Categorie IS NULL");
+    $req = $conn->prepare("SELECT Cat_Id, Cat_Nom FROM VBL_Categorie LEFT JOIN MBL_Catlivre ON Cat_Id = CatLivre_Categorie AND CatLivre_Livre = :livreId WHERE CatLivre_Categorie IS NULL");
     $req->execute([
         'livreId' => $bookId
     ]);
@@ -143,7 +143,7 @@ function getNoCatBook($conn, $bookId){
 }
 
 function getBooksByReader($conn, $idReader, $link){
-    $req = $conn->prepare('SELECT * FROM mbl_lecteurlivre JOIN mbl_livre ON `LectLivre_Livre` = `Lvr_Id` WHERE `LectLivre_Lecteur` = :readerId AND `LectLivre_Type` = :typeLink');
+    $req = $conn->prepare('SELECT * FROM MBL_Lecteurlivre JOIN MBL_Livre ON `LectLivre_Livre` = `Lvr_Id` WHERE `LectLivre_Lecteur` = :readerId AND `LectLivre_Type` = :typeLink');
     $req->execute([
         'readerId' => $idReader,
         'typeLink' => $link
@@ -153,7 +153,7 @@ function getBooksByReader($conn, $idReader, $link){
 }
 
 function getBooksSearchByReader($conn, $searchValue, $idReader, $link){
-    $req = $conn->prepare('SELECT * FROM mbl_lecteurlivre JOIN mbl_livre ON `LectLivre_Livre` = `Lvr_Id` WHERE `LectLivre_Lecteur` = :readerId AND `LectLivre_Type` = :typeLink AND `Lvr_Nom` LIKE :search');
+    $req = $conn->prepare('SELECT * FROM MBL_Lecteurlivre JOIN MBL_Livre ON `LectLivre_Livre` = `Lvr_Id` WHERE `LectLivre_Lecteur` = :readerId AND `LectLivre_Type` = :typeLink AND `Lvr_Nom` LIKE :search');
     $req->execute([
         'readerId' => $idReader,
         'typeLink' => $link,
@@ -164,7 +164,7 @@ function getBooksSearchByReader($conn, $searchValue, $idReader, $link){
 }
 
 function getReaderBookStatus($conn, $idReader, $idBook){
-    $req = $conn->prepare('SELECT * FROM mbl_lecteurlivre WHERE `LectLivre_Livre` = :bookId AND `LectLivre_Lecteur` = :readerId');
+    $req = $conn->prepare('SELECT * FROM MBL_Lecteurlivre WHERE `LectLivre_Livre` = :bookId AND `LectLivre_Lecteur` = :readerId');
     $req->execute([
         'bookId' => $idBook,
         'readerId' => $idReader
@@ -178,7 +178,7 @@ function getReaderBookStatus($conn, $idReader, $idBook){
 }
 
 function addReaderBookStatus($conn, $idReader, $idBook, $status){
-    $req = $conn->prepare('insert into mbl_lecteurlivre (`LectLivre_Livre`, `LectLivre_Lecteur`, `LectLivre_Type`) values(:bookId, :readerId, :status)');
+    $req = $conn->prepare('insert into MBL_Lecteurlivre (`LectLivre_Livre`, `LectLivre_Lecteur`, `LectLivre_Type`) values(:bookId, :readerId, :status)');
     $req->execute([
         'bookId' => $idBook,
         'readerId' => $idReader,
@@ -187,7 +187,7 @@ function addReaderBookStatus($conn, $idReader, $idBook, $status){
 }
 
 function updateReaderBookStatus($conn, $idReader, $idBook, $status){
-    $req = $conn->prepare('update mbl_lecteurlivre set LectLivre_Type = :status where LectLivre_Livre = :bookId and LectLivre_Lecteur = :readerId');
+    $req = $conn->prepare('update MBL_Lecteurlivre set LectLivre_Type = :status where LectLivre_Livre = :bookId and LectLivre_Lecteur = :readerId');
     $req->execute([
         'bookId' => $idBook,
         'readerId' => $idReader,
