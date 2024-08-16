@@ -143,7 +143,7 @@ function getNoCatBook($conn, $bookId){
 }
 
 function getBooksByReader($conn, $idReader, $link){
-    $req = $conn->prepare('SELECT * FROM MBL_Lecteurlivre JOIN MBL_Livre ON `LectLivre_Livre` = `Lvr_Id` WHERE `LectLivre_Lecteur` = :readerId AND `LectLivre_Type` = :typeLink');
+    $req = $conn->prepare('SELECT * FROM MBL_LecteurLivre JOIN MBL_Livre ON `LectLivre_Livre` = `Lvr_Id` WHERE `LectLivre_Lecteur` = :readerId AND `LectLivre_Type` = :typeLink');
     $req->execute([
         'readerId' => $idReader,
         'typeLink' => $link
@@ -153,7 +153,7 @@ function getBooksByReader($conn, $idReader, $link){
 }
 
 function getBooksSearchByReader($conn, $searchValue, $idReader, $link){
-    $req = $conn->prepare('SELECT * FROM MBL_Lecteurlivre JOIN MBL_Livre ON `LectLivre_Livre` = `Lvr_Id` WHERE `LectLivre_Lecteur` = :readerId AND `LectLivre_Type` = :typeLink AND `Lvr_Nom` LIKE :search');
+    $req = $conn->prepare('SELECT * FROM MBL_LecteurLivre JOIN MBL_Livre ON `LectLivre_Livre` = `Lvr_Id` WHERE `LectLivre_Lecteur` = :readerId AND `LectLivre_Type` = :typeLink AND `Lvr_Nom` LIKE :search');
     $req->execute([
         'readerId' => $idReader,
         'typeLink' => $link,
@@ -164,7 +164,7 @@ function getBooksSearchByReader($conn, $searchValue, $idReader, $link){
 }
 
 function getReaderBookStatus($conn, $idReader, $idBook){
-    $req = $conn->prepare('SELECT * FROM MBL_Lecteurlivre WHERE `LectLivre_Livre` = :bookId AND `LectLivre_Lecteur` = :readerId');
+    $req = $conn->prepare('SELECT * FROM MBL_LecteurLivre WHERE `LectLivre_Livre` = :bookId AND `LectLivre_Lecteur` = :readerId');
     $req->execute([
         'bookId' => $idBook,
         'readerId' => $idReader
@@ -178,7 +178,7 @@ function getReaderBookStatus($conn, $idReader, $idBook){
 }
 
 function addReaderBookStatus($conn, $idReader, $idBook, $status){
-    $req = $conn->prepare('insert into MBL_Lecteurlivre (`LectLivre_Livre`, `LectLivre_Lecteur`, `LectLivre_Type`) values(:bookId, :readerId, :status)');
+    $req = $conn->prepare('insert into MBL_LecteurLivre (`LectLivre_Livre`, `LectLivre_Lecteur`, `LectLivre_Type`) values(:bookId, :readerId, :status)');
     $req->execute([
         'bookId' => $idBook,
         'readerId' => $idReader,
@@ -187,7 +187,7 @@ function addReaderBookStatus($conn, $idReader, $idBook, $status){
 }
 
 function updateReaderBookStatus($conn, $idReader, $idBook, $status){
-    $req = $conn->prepare('update MBL_Lecteurlivre set LectLivre_Type = :status where LectLivre_Livre = :bookId and LectLivre_Lecteur = :readerId');
+    $req = $conn->prepare('update MBL_LecteurLivre set LectLivre_Type = :status where LectLivre_Livre = :bookId and LectLivre_Lecteur = :readerId');
     $req->execute([
         'bookId' => $idBook,
         'readerId' => $idReader,
